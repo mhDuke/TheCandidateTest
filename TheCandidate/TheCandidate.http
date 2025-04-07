@@ -1,0 +1,20 @@
+@TheCandidate_HostAddress = http://localhost:5062
+
+GET {{TheCandidate_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### Get all candidates
+GET {{TheCandidate_HostAddress}}/candidates
+Accept: application/json
+
+### Add a new candidate
+POST {{TheCandidate_HostAddress}}/candidates
+Content-Type: application/json
+{
+  "name": "Diana Prince",
+  "experienceYears": 6
+}
+
+### Get some candidates
+GET {{TheCandidate_HostAddress}}/candidates/filter?pageNumber=2&pageSize=2
+Accept: application/json
