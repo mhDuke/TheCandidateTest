@@ -42,11 +42,12 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Candidate>().HasData(
-            new Candidate { Id = 1, Name = "Alice Smith", ExperienceYears = 5 },
-            new Candidate { Id = 2, Name = "Bob Johnson", ExperienceYears = 3 },
-            new Candidate { Id = 3, Name = "Charlie Brown", ExperienceYears = 8 },
-            new Candidate { Id = 4, Name = "Mathew scrows", ExperienceYears = 8 }
-        );
+        [
+            new Candidate { Id = 1, EnglishName = "Alice Smith", ArabicName = "arabic name 1", ExperienceYears = 1 },
+            new Candidate { Id = 2, EnglishName = "Bob Johnson", ArabicName = "arabic name 2", ExperienceYears = 2 },
+            new Candidate { Id = 3, EnglishName = "Charlie Brown", ArabicName = "arabic name 3", ExperienceYears = 3 },
+            new Candidate { Id = 4, EnglishName = "Mathew scrows", ArabicName = "arabic name 4", ExperienceYears = 3 },
+        ]);
     }
     public DbSet<Candidate> Candidates { get; set; }
 }
@@ -54,7 +55,8 @@ public class ApplicationDbContext : DbContext
 public class Candidate
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string EnglishName { get; set; }
+    public string ArabicName { get; set; }
     public int ExperienceYears { get; set; }
 }
 

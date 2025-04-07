@@ -11,7 +11,8 @@ Accept: application/json
 POST {{TheCandidate_HostAddress}}/candidates
 Content-Type: application/json
 {
-  "name": "Diana Prince",
+  "englishName": "Diana Prince",
+  "ArabicName": "arabic Diana Prince",
   "experienceYears": 6
 }
 
