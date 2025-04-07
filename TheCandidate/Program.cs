@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlite("Data Source=candidates.dat"));
+builder.Services.AddTransient<DbInitiator>();
 
 var app = builder.Build();
 
@@ -20,6 +21,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var dbInititor = scope.ServiceProvider.GetRequiredService<DbInitiator>();
+await dbInititor.EnsureCreated();
 
 app.Run();
 
@@ -51,4 +56,16 @@ public class Candidate
     public int Id { get; set; }
     public string Name { get; set; }
     public int ExperienceYears { get; set; }
+}
+
+public class DbInitiator(ApplicationDbContext db)
+{
+    public async Task EnsureCreated()
+    {
+        //if (await db.Database.CanConnectAsync())
+        //    return;
+
+        db.Database.EnsureDeleted();
+        db.Database.EnsureCreated();
+    }
 }
